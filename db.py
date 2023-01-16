@@ -8,7 +8,7 @@ conString = textwrap.dedent(f"""\
             Server={server};
             Trusted_Connection=yes;
             """)
-
-print(conString)
 conn = pyodbc.connect(conString)
 cursor = conn.cursor()
+print(cursor)
+conn.close()
