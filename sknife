@@ -1,0 +1,6 @@
+class Sknif:
+    
+    def sql_select_string(self, db_table, db_columns, search_columns, search_values, param):
+        
+        if type(db_table) != type(str()):
+            raise TypeError('table name must be a string')
