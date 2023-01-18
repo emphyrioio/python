@@ -25,6 +25,7 @@ class Addressee(Base):
 
     id = Column("id", Integer, primary_key=True)
     name = Column("name", String)
+    category = Column("category", String, unique=True)
     department = Column("department", String)
     phones = Column("phones", String)
     emails = Column("emails", String)
@@ -38,8 +39,9 @@ class Addressee(Base):
     state = Column("state", String)
     country = Column("country", String)
 
-    def __init__(self, name, department, phones, emails, faxes, websites, address, PObox, zipcode, town, business_zipcode, state, country):
+    def __init__(self, name, category, department, phones, emails, faxes, websites, address, PObox, zipcode, town, business_zipcode, state, country):
         self.name = name
+        self.category = category
         self.department = department
         self.phones = phones
         self.emails = emails
@@ -69,10 +71,29 @@ Session = sessionmaker(bind=engine)
 
 session = Session()
 
+<<<<<<< HEAD
 cat_banque = Categories("BANK")
 cat_life_insurance = Categories("LIFE_INSURANCE")
 pension = Categories("PENSION")
 building_manager = Categories("BUILDING_MANAGER")
+=======
+addressee = Addressee(
+    "BNP PARIBAS",
+    "BANK",
+    "AGENCE SUCCESSIONS",
+    "0100000000",
+    "mail@mail.com",
+    "0100000000",
+    "www.site.com",
+    "16, boulevard des Italiens",
+    "111111",
+    "75120",
+    "PARIS",
+    "CEDEX 02",
+    "PARIS",
+    "FRANCE"
+    )
+>>>>>>> 6b301d6cbea3eefdc22dc38164864963ff0769ac
 
 # addressee = Addressee(
 #     "BNP PARIBAS",
