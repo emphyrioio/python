@@ -8,6 +8,18 @@ import textwrap
 Base = declarative_base()
 
 
+class Categories(Base):
+    __tablename__ = "categories"
+    id = Column("id", Integer, primary_key=True)
+    name = Column("name", String)
+
+def __init__(self, name):
+    self.name = name
+
+    def __repr__(self):
+        return f"{self.name}"
+        
+
 class Addressee(Base):
     __tablename__ = "adressees"
 
@@ -57,23 +69,28 @@ Session = sessionmaker(bind=engine)
 
 session = Session()
 
-addressee = Addressee(
-    "BNP PARIBAS",
-    "AGENCE SUCCESSIONS",
-    "0100000000",
-    "mail@mail.com",
-    "0100000000",
-    "www.site.com",
-    "16, boulevard des Italiens",
-    "111111",
-    "75120",
-    "PARIS",
-    "CEDEX 02",
-    "PARIS",
-    "FRANCE"
-    )
+cat_banque = Categories("BANK")
+cat_life_insurance = Categories("LIFE_INSURANCE")
+pension = Categories("PENSION")
+building_manager = Categories("BUILDING_MANAGER")
 
-session.add(addressee)
+# addressee = Addressee(
+#     "BNP PARIBAS",
+#     "AGENCE SUCCESSIONS",
+#     "0100000000",
+#     "mail@mail.com",
+#     "0100000000",
+#     "www.site.com",
+#     "16, boulevard des Italiens",
+#     "111111",
+#     "75120",
+#     "PARIS",
+#     "CEDEX 02",
+#     "PARIS",
+#     "FRANCE"
+#     )
+
+# session.add(addressee)
 session.commit()
 
-print(addressee)
+# print(addressee)
