@@ -13,19 +13,19 @@ class Categories(Base):
     id = Column("id", Integer, primary_key=True)
     name = Column("name", String)
 
-def __init__(self, name):
-    self.name = name
+    def __init__(self, name):
+        self.name = name
 
     def __repr__(self):
         return f"{self.name}"
-        
+
 
 class Addressee(Base):
     __tablename__ = "adressees"
 
     id = Column("id", Integer, primary_key=True)
-    name = Column("name", String)
-    category = Column("category", String, unique=True)
+    name = Column("name", String, unique=True)
+    category = Column("category", Integer, ForeignKey("categories.id"))
     department = Column("department", String)
     phones = Column("phones", String)
     emails = Column("emails", String)
@@ -64,6 +64,7 @@ class Addressee(Base):
             {self.town} {self.business_zipcode}
             {self.state} {self.country}""")
 
+
 engine = create_engine('sqlite:///addressees.db', echo=True)
 Base.metadata.create_all(bind=engine)
 
@@ -71,15 +72,20 @@ Session = sessionmaker(bind=engine)
 
 session = Session()
 
-<<<<<<< HEAD
-cat_banque = Categories("BANK")
+cat_bank = Categories("BANK")
 cat_life_insurance = Categories("LIFE_INSURANCE")
 pension = Categories("PENSION")
 building_manager = Categories("BUILDING_MANAGER")
-=======
+
+session.add(cat_bank)
+session.add(cat_life_insurance)
+session.add(pension)
+session.add(building_manager)
+session.commit()
+
 addressee = Addressee(
     "BNP PARIBAS",
-    "BANK",
+    cat_bank.id,
     "AGENCE SUCCESSIONS",
     "0100000000",
     "mail@mail.com",
@@ -92,26 +98,9 @@ addressee = Addressee(
     "CEDEX 02",
     "PARIS",
     "FRANCE"
-    )
->>>>>>> 6b301d6cbea3eefdc22dc38164864963ff0769ac
+)
 
-# addressee = Addressee(
-#     "BNP PARIBAS",
-#     "AGENCE SUCCESSIONS",
-#     "0100000000",
-#     "mail@mail.com",
-#     "0100000000",
-#     "www.site.com",
-#     "16, boulevard des Italiens",
-#     "111111",
-#     "75120",
-#     "PARIS",
-#     "CEDEX 02",
-#     "PARIS",
-#     "FRANCE"
-#     )
-
-# session.add(addressee)
+session.add(addressee)
 session.commit()
 
 # print(addressee)
