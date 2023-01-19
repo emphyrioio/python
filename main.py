@@ -1,24 +1,19 @@
-import os
-
+from dataclasses import dataclass, field
+from typing import ClassVar
 from sqlalchemy import create_engine, ForeignKey, Column, String, Integer, CHAR
 from sqlalchemy.orm import declarative_base, sessionmaker
-
 import textwrap
 
 Base = declarative_base()
 
 
+@dataclass
 class Categories(Base):
-    __tablename__ = "categories"
-    id = Column("id", Integer, primary_key=True)
-    name = Column("name", String)
-
-    def __init__(self, name):
-        self.name = name
-
-    def __repr__(self):
-        return f"{self.name}"
-
+    __tablename__: ClassVar[str] = "categories"
+    id: ClassVar[Column] = Column("id", Integer, primary_key=True)
+    name: ClassVar[Column] = Column("name", String)
+    id: int
+    name: str
 
 class Addressee(Base):
     __tablename__ = "adressees"
@@ -39,7 +34,23 @@ class Addressee(Base):
     state = Column("state", String)
     country = Column("country", String)
 
-    def __init__(self, name, category, department, phones, emails, faxes, websites, address, PObox, zipcode, town, business_zipcode, state, country):
+    def __init__(
+        self,
+        name,
+        category,
+        department,
+        phones,
+        emails,
+        faxes,
+        websites,
+        address,
+        PObox,
+        zipcode,
+        town,
+        business_zipcode,
+        state,
+        country,
+    ):
         self.name = name
         self.category = category
         self.department = department
@@ -56,31 +67,28 @@ class Addressee(Base):
         self.country = country
 
     def __repr__(self):
-        return textwrap.dedent(f"""\
+        return textwrap.dedent(
+            f"""\
             {self.name}
             {self.department}
             {self.address}
             {self.PObox}
             {self.town} {self.business_zipcode}
-            {self.state} {self.country}""")
+            {self.state} {self.country}"""
+        )
 
 
-engine = create_engine('sqlite:///addressees.db', echo=True)
+engine = create_engine("sqlite:///addressees.db", echo=True)
 Base.metadata.create_all(bind=engine)
 
 Session = sessionmaker(bind=engine)
 
 session = Session()
 
-cat_bank = Categories("BANK")
-cat_life_insurance = Categories("LIFE_INSURANCE")
-pension = Categories("PENSION")
-building_manager = Categories("BUILDING_MANAGER")
+cat_bank = Categories(name="BANK")
 
 session.add(cat_bank)
-session.add(cat_life_insurance)
-session.add(pension)
-session.add(building_manager)
+
 session.commit()
 
 addressee = Addressee(
@@ -97,7 +105,7 @@ addressee = Addressee(
     "PARIS",
     "CEDEX 02",
     "PARIS",
-    "FRANCE"
+    "FRANCE",
 )
 
 session.add(addressee)
