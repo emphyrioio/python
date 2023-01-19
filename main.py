@@ -1,11 +1,11 @@
+import textwrap
 from dataclasses import dataclass, field
 from typing import ClassVar
-from sqlalchemy import create_engine, ForeignKey, Column, String, Integer, CHAR
+
+from sqlalchemy import CHAR, Column, ForeignKey, Integer, String, create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
-import textwrap
 
 Base = declarative_base()
-
 
 @dataclass
 class Categories(Base):
@@ -14,6 +14,7 @@ class Categories(Base):
     name: ClassVar[Column] = Column("name", String)
     id: int
     name: str
+
 
 class Addressee(Base):
     __tablename__ = "adressees"

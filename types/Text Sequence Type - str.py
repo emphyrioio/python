@@ -2,6 +2,7 @@
 line1
 line2
 """
+
 string = 'line1\nline2'
 print(string)
 
