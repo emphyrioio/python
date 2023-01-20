@@ -1,12 +1,17 @@
+from dataclasses import dataclass
+from typing import Any
+
+
+@dataclass
 class Model:
-    def __init__(self) -> None:
+    def get(self):
         pass
 
-    def add(self) -> None:
+    def add(self, item: Any) -> None:
+        pass
+
+    def update(self) -> None:
         pass
 
     def delete(self) -> None:
-        pass
-
-    def get(self):
         pass
