@@ -10,8 +10,8 @@ class Model:
     def add(self, item: Any) -> None:
         pass
 
-    def update(self) -> None:
+    def delete(self) -> None:
         pass
 
-    def delete(self) -> None:
+    def update(self) -> None:
         pass

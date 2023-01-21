@@ -1,18 +1,26 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 from dataclasses import dataclass
-from typing import Callable, ClassVar, Protocol
+from typing import Any, Callable, ClassVar, Protocol
 
-from presenter import Presenter
 from ttkthemes import ThemedTk
 
 
 @dataclass
-class View(Protocol):
-    def handle_add(self, event=None) -> None:
+class Presenter(Protocol):
+    def handle_add(self) -> None:
         ...
 
-    def handle_delete(self, event=None) -> None:
+    def handle_get(self) -> Any:
+        ...
+
+    def handle_delete(self) -> None:
+        ...
+
+    def handle_update(self) -> None:
+        ...
+
+    def run(self) -> None:
         ...
 
 
@@ -24,8 +32,6 @@ class Gui(ThemedTk):
     __WINDOW_WIDTH: ClassVar[int] = 800
     __WINDOWS_HEIGHT: ClassVar[int] = 600
 
-    theme: str = "black"
-
     def __post_init__(self) -> None:
         super().__init__()
 
@@ -33,12 +39,10 @@ class Gui(ThemedTk):
         self.iconbitmap(Gui.__WINDOW_ICON)
         self.geometry("%sx%s" % (Gui.__WINDOW_WIDTH, Gui.__WINDOWS_HEIGHT))
 
-        self.create_ui()
-
     def create_ui(self, presenter: Presenter) -> None:
         # STYLING
         self.style = ttk.Style(self)
-        self.style.theme_use(self.theme)
+        self.style.theme_use("black")
 
         # WIDGETS
         self.entry = ttk.Button(self, text="Hello, world!")
@@ -48,12 +52,20 @@ class Gui(ThemedTk):
         self.rowconfigure(0, weight=1)
         self.columnconfigure(0, weight=1)
 
+        # BINDINGS
+        # .bind('', self.presenter.handle_add)
+        # .bind('', self.presenter.handle_get)
+        # .bind('', self.presenter.handle_delete)
+        # .bind('', self.presenter.handle_update)
+
     def get(self):
-        ...
+        pass
 
-    # BINDINGS
-    def bind_add(self, callback: Callable[[tk.Event], None]) -> None:
-        ...
+    def add(self):
+        pass
 
-    def bind_delete(self, callback: Callable[[tk.Event], None]) -> None:
-        ...
+    def delete(self):
+        pass
+
+    def update(self):
+        pass

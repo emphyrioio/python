@@ -5,9 +5,9 @@ from presenter import Presenter
 
 def main() -> None:
     model = Model()
-    gui = Gui(model)
-    controller = Presenter(model, gui)
-    controller.run()
+    gui = Gui()
+    presenter = Presenter(model, gui)
+    presenter.run()
 
 
 if __name__ == "__main__":
