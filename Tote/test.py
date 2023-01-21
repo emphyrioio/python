@@ -1,11 +1,11 @@
 from model import Model
 from presenter import Presenter
-from view import Gui
+from view import TodoList
 
 
 def main() -> None:
     model = Model()
-    view = Gui()
+    view = TodoList()
     presenter = Presenter(model, view)
     presenter.run()
 

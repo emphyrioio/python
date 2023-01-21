@@ -1,26 +1,22 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 from dataclasses import dataclass
-from typing import Any, Callable, ClassVar, Protocol
+from typing import ClassVar, Protocol
 
 from ttkthemes import ThemedTk
 
 
-@dataclass
 class Presenter(Protocol):
     def handle_add(self) -> None:
         ...
 
-    def handle_get(self) -> Any:
+    def handle_get(self) -> None:
         ...
 
     def handle_delete(self) -> None:
         ...
 
     def handle_update(self) -> None:
-        ...
-
-    def run(self) -> None:
         ...
 
 
@@ -32,40 +28,33 @@ class Gui(ThemedTk):
     __WINDOW_WIDTH: ClassVar[int] = 800
     __WINDOWS_HEIGHT: ClassVar[int] = 600
 
+    theme: str = "black"
+
     def __post_init__(self) -> None:
         super().__init__()
-
         self.title(Gui.__WINDOW_TITLE)
         self.iconbitmap(Gui.__WINDOW_ICON)
         self.geometry("%sx%s" % (Gui.__WINDOW_WIDTH, Gui.__WINDOWS_HEIGHT))
 
-    def create_ui(self, presenter: Presenter) -> None:
+    def init_ui(self, presenter: Presenter) -> None:
         # STYLING
         self.style = ttk.Style(self)
-        self.style.theme_use("black")
-
+        self.style.theme_use(self.theme)
+        pass
         # WIDGETS
-        self.entry = ttk.Button(self, text="Hello, world!")
-        self.entry.grid(row=0, column=0, sticky="EW")
 
-        # GRID CONFIGURATION
-        self.rowconfigure(0, weight=1)
-        self.columnconfigure(0, weight=1)
+        # GRID CONDIGURATION
 
-        # BINDINGS
-        # .bind('', self.presenter.handle_add)
-        # .bind('', self.presenter.handle_get)
-        # .bind('', self.presenter.handle_delete)
-        # .bind('', self.presenter.handle_update)
+        # BIDINGS
 
-    def get(self):
+    def add(self) -> None:
         pass
 
-    def add(self):
+    def get(self) -> None:
         pass
 
-    def delete(self):
+    def delete(self) -> None:
         pass
 
-    def update(self):
+    def update(self) -> None:
         pass

@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Protocol
 
-from model import Model
+from model import Addressee, DeceasedPerson, Profil, Template
 
 
 class View(Protocol):
@@ -28,7 +28,10 @@ class View(Protocol):
 
 @dataclass
 class Presenter:
-    model: Model
+    profil: Profil
+    addressee: Addressee
+    template: Template
+    deceased_person: DeceasedPerson
     view: View
 
     def __post_init__(self) -> None:
