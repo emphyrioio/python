@@ -1,10 +1,10 @@
-from model import Addressee, DeceasedPerson, Profil, Template
+from model import Addressee, DeceasedPerson, Profile, Template
 from presenter import Presenter
 from view import Gui
 
 
 def main() -> None:
-    profil = Profil()
+    profil = Profile()
     addressee = Addressee()
     template = Template()
     deceased_person = DeceasedPerson()

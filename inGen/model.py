@@ -2,7 +2,22 @@ from dataclasses import dataclass
 
 
 @dataclass
-class Profil:
+class Configuration:
+    def add(self) -> None:
+        pass
+
+    def get(self) -> None:
+        pass
+
+    def delete(self) -> None:
+        pass
+
+    def update(self) -> None:
+        pass
+
+
+@dataclass
+class Profile:
     def add(self) -> None:
         pass
 
