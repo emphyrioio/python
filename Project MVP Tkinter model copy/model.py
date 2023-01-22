@@ -9,8 +9,8 @@ class Model:
     def get(self) -> None:
         pass
 
-    def delete(self) -> None:
+    def update(self) -> None:
         pass
 
-    def update(self) -> None:
+    def delete(self) -> None:
         pass

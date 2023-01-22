@@ -1,22 +1,22 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 from dataclasses import dataclass
-from typing import ClassVar, Protocol
+from typing import Callable, ClassVar, Protocol
 
 from ttkthemes import ThemedTk
 
 
 class Presenter(Protocol):
-    def handle_add(self) -> None:
+    def handle_add(self, event: Callable[[tk.Event], None]) -> None:
         ...
 
-    def handle_get(self) -> None:
+    def handle_get(self, event: Callable[[tk.Event], None]) -> None:
         ...
 
-    def handle_delete(self) -> None:
+    def handle_update(self, event: Callable[[tk.Event], None]) -> None:
         ...
 
-    def handle_update(self) -> None:
+    def handle_delete(self, event: Callable[[tk.Event], None]) -> None:
         ...
 
 
@@ -40,21 +40,21 @@ class Gui(ThemedTk):
         # STYLING
         self.style = ttk.Style(self)
         self.style.theme_use(self.theme)
-        pass
         # WIDGETS
 
         # GRID CONDIGURATION
 
         # BIDINGS
 
+    # ACTIONS
     def add(self) -> None:
         pass
 
     def get(self) -> None:
         pass
 
-    def delete(self) -> None:
+    def update(self) -> None:
         pass
 
-    def update(self) -> None:
+    def delete(self) -> None:
         pass

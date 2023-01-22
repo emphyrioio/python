@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+import tkinter as tk
 from dataclasses import dataclass
-from typing import Protocol
+from typing import Callable, Protocol
 
 from model import Model
 
@@ -16,10 +17,10 @@ class View(Protocol):
     def get(self) -> None:
         ...
 
-    def delete(self) -> None:
+    def update(self) -> None:
         ...
 
-    def update(self) -> None:
+    def delete(self) -> None:
         ...
 
     def mainloop(self) -> None:
@@ -35,16 +36,16 @@ class Presenter:
         pass
 
     # ACTIONS
-    def handle_add(self, event=None) -> None:
+    def handle_add(self, event: Callable[[tk.Event], None]) -> None:
         pass
 
-    def handle_get(self, event=None) -> None:
+    def handle_get(self, event: Callable[[tk.Event], None]) -> None:
         pass
 
-    def handle_delete(self, event=None) -> None:
+    def handle_update(self, event: Callable[[tk.Event], None]) -> None:
         pass
 
-    def handle_update(self, event=None) -> None:
+    def handle_delete(self, event: Callable[[tk.Event], None]) -> None:
         pass
 
     def run(self) -> None:
