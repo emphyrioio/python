@@ -1,14 +1,9 @@
-from model import Model
-from presenter import Presenter
-from view import TodoList
+class A:
+    A = 1
+    _B = 2
 
 
-def main() -> None:
-    model = Model()
-    view = TodoList()
-    presenter = Presenter(model, view)
-    presenter.run()
-
-
-if __name__ == "__main__":
-    main()
+a = A()
+A._B = 3
+print(A.A)
+print(A._B)
