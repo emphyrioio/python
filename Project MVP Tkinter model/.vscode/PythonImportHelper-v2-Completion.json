@@ -1,0 +1,228 @@
+[
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "yaml",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "yaml",
+        "description": "yaml",
+        "detail": "yaml",
+        "documentation": {}
+    },
+    {
+        "label": "Config",
+        "importPath": "config",
+        "description": "config",
+        "isExtraImport": true,
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "Config",
+        "importPath": "config",
+        "description": "config",
+        "isExtraImport": true,
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "Model",
+        "importPath": "models",
+        "description": "models",
+        "isExtraImport": true,
+        "detail": "models",
+        "documentation": {}
+    },
+    {
+        "label": "Model",
+        "importPath": "models",
+        "description": "models",
+        "isExtraImport": true,
+        "detail": "models",
+        "documentation": {}
+    },
+    {
+        "label": "Presenter",
+        "importPath": "presenter",
+        "description": "presenter",
+        "isExtraImport": true,
+        "detail": "presenter",
+        "documentation": {}
+    },
+    {
+        "label": "Gui",
+        "importPath": "view",
+        "description": "view",
+        "isExtraImport": true,
+        "detail": "view",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "tkinter",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Protocol",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Protocol",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "tkinter.ttk",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "tkinter.ttk",
+        "description": "tkinter.ttk",
+        "detail": "tkinter.ttk",
+        "documentation": {}
+    },
+    {
+        "label": "ThemedTk",
+        "importPath": "ttkthemes",
+        "description": "ttkthemes",
+        "isExtraImport": true,
+        "detail": "ttkthemes",
+        "documentation": {}
+    },
+    {
+        "label": "Config",
+        "kind": 6,
+        "importPath": "config",
+        "description": "config",
+        "peekOfCode": "class Config:\n    _config_file: str = \"config.yml\"\n    config_parameters: dict = field(default_factory=dict)\n    def __post_init__(self) -> None:\n        with open(self.config_file, \"r\") as config_file:\n            self.config_parameters = yaml.safe_load(config_file)\n    def get_parameter(self, parameter_name=None) -> str | int | None:\n        if parameter_name in self.config_parameters:\n            return self.config_parameters[parameter_name]\n        else:",
+        "detail": "config",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def main() -> None:\n    conf = Config()\n    model = Model()\n    view = Gui(conf)\n    presenter = Presenter(model, view)\n    presenter.run()\nif __name__ == \"__main__\":\n    main()",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "Model",
+        "kind": 6,
+        "importPath": "models",
+        "description": "models",
+        "peekOfCode": "class Model:\n    def add(self) -> None:\n        pass\n    def get(self) -> None:\n        pass\n    def update(self) -> None:\n        pass\n    def delete(self) -> None:\n        pass",
+        "detail": "models",
+        "documentation": {}
+    },
+    {
+        "label": "View",
+        "kind": 6,
+        "importPath": "presenter",
+        "description": "presenter",
+        "peekOfCode": "class View(Protocol):\n    def init_ui(self, presenter: Presenter) -> None:\n        ...\n    def add(self) -> None:\n        ...\n    def get(self) -> None:\n        ...\n    def update(self) -> None:\n        ...\n    def delete(self) -> None:",
+        "detail": "presenter",
+        "documentation": {}
+    },
+    {
+        "label": "Presenter",
+        "kind": 6,
+        "importPath": "presenter",
+        "description": "presenter",
+        "peekOfCode": "class Presenter:\n    model: Model\n    view: View\n    def __post_init__(self) -> None:\n        pass\n    # ACTIONS\n    def handle_add(self, event: Callable[[tk.Event], None]) -> None:\n        pass\n    def handle_get(self, event: Callable[[tk.Event], None]) -> None:\n        pass",
+        "detail": "presenter",
+        "documentation": {}
+    },
+    {
+        "label": "Presenter",
+        "kind": 6,
+        "importPath": "view",
+        "description": "view",
+        "peekOfCode": "class Presenter(Protocol):\n    def handle_add(self, event: Callable[[tk.Event], None]) -> None:\n        ...\n    def handle_get(self, event: Callable[[tk.Event], None]) -> None:\n        ...\n    def handle_update(self, event: Callable[[tk.Event], None]) -> None:\n        ...\n    def handle_delete(self, event: Callable[[tk.Event], None]) -> None:\n        ...\n@dataclass",
+        "detail": "view",
+        "documentation": {}
+    },
+    {
+        "label": "Gui",
+        "kind": 6,
+        "importPath": "view",
+        "description": "view",
+        "peekOfCode": "class Gui(ThemedTk):\n    conf: Config\n    def __post_init__(self) -> None:\n        super().__init__()\n        # Window configuration\n        self.title(self.conf.get_parameter(\"app_title\"))\n        self.iconbitmap(self.conf.get_parameter(\"app_icon_file\"))\n        # Window geometry\n        window_width = self.conf.get_parameter(\"app_window_width\")\n        window_height = self.conf.get_parameter(\"app_window_height\")",
+        "detail": "view",
+        "documentation": {}
+    }
+]
