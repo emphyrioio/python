@@ -4,8 +4,6 @@ import yaml
 
 @dataclass
 class Config:
-    _config_file: str = "config.yml"
-
     config_parameters: dict = field(default_factory=dict)
 
     def __post_init__(self) -> None:
@@ -20,4 +18,5 @@ class Config:
 
     @property
     def config_file(self):
-        return self._config_file
+        _config_file = "config.yml"
+        return _config_file

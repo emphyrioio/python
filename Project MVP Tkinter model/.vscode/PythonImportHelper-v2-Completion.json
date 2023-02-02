@@ -167,7 +167,7 @@
         "kind": 6,
         "importPath": "config",
         "description": "config",
-        "peekOfCode": "class Config:\n    _config_file: str = \"config.yml\"\n    config_parameters: dict = field(default_factory=dict)\n    def __post_init__(self) -> None:\n        with open(self.config_file, \"r\") as config_file:\n            self.config_parameters = yaml.safe_load(config_file)\n    def get_parameter(self, parameter_name=None) -> str | int | None:\n        if parameter_name in self.config_parameters:\n            return self.config_parameters[parameter_name]\n        else:",
+        "peekOfCode": "class Config:\n    config_parameters: dict = field(default_factory=dict)\n    def __post_init__(self) -> None:\n        with open(self.config_file, \"r\") as config_file:\n            self.config_parameters = yaml.safe_load(config_file)\n    def get_parameter(self, parameter_name=None) -> str | int | None:\n        if parameter_name in self.config_parameters:\n            return self.config_parameters[parameter_name]\n        else:\n            raise ValueError(\"Unknow parameter\")",
         "detail": "config",
         "documentation": {}
     },
