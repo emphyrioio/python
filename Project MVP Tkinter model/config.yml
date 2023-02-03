@@ -1,6 +1,16 @@
+# App window parameters
 app_title: Title
 app_icon_file: 
 app_window_width:  800
 app_window_height: 600
 app_theme: black
-db_sqlite3: 
+app_window_resizable_width: True
+app_window_resizable_height: True
+app_window_min_width:
+app_window_min_height:
+app_window_max_width: 
+app_window_max_height:
+app_window_alpha: 1
+app_window_topmost: 0
+# SQLite3
+db_sqlite3:

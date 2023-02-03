@@ -40,6 +40,14 @@
         "documentation": {}
     },
     {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
         "label": "yaml",
         "kind": 6,
         "isExtraImport": true,
@@ -74,7 +82,7 @@
         "documentation": {}
     },
     {
-        "label": "Model",
+        "label": "SimpleSQLiteModel",
         "importPath": "models",
         "description": "models",
         "isExtraImport": true,
@@ -205,6 +213,14 @@
         "documentation": {}
     },
     {
+        "label": "TkFactory",
+        "importPath": "tkfactory",
+        "description": "tkfactory",
+        "isExtraImport": true,
+        "detail": "tkfactory",
+        "documentation": {}
+    },
+    {
         "label": "Config",
         "kind": 6,
         "importPath": "config",
@@ -218,7 +234,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def main() -> None:\n    configuration_file = \"config.yml\"\n    conf = Config(configuration_file)\n    model = Model()\n    view = Gui(conf)\n    presenter = Presenter(model, view)\n    presenter.run()\nif __name__ == \"__main__\":\n    main()",
+        "peekOfCode": "def main() -> None:\n    configuration_file = \"config.yml\"\n    conf = Config(configuration_file)\n    model = SimpleSQLiteModel()\n    view = Gui(conf)\n    presenter = Presenter(model, view)\n    presenter.run()\nif __name__ == \"__main__\":\n    main()",
         "detail": "main",
         "documentation": {}
     },
@@ -268,6 +284,15 @@
         "documentation": {}
     },
     {
+        "label": "TkFactory",
+        "kind": 6,
+        "importPath": "tkfactory",
+        "description": "tkfactory",
+        "peekOfCode": "class TkFactory(ttk.Frame):\n    master: tk.Wm | ttk.Frame\n    frame: ttk.Frame = None\n    def __post_init__(self) -> None:\n        super().__init__()\n        self.frame = self.create_frame()\n    def create_frame(self):\n        self.frame = ttk.Frame(self.master, padding=(5, 10, 5, 10))\n        self.treeview = ttk.Treeview(self.frame, selectmode=\"browse\")\n        self.xscroll = ttk.Scrollbar(",
+        "detail": "tkfactory",
+        "documentation": {}
+    },
+    {
         "label": "Presenter",
         "kind": 6,
         "importPath": "view",
@@ -281,7 +306,16 @@
         "kind": 6,
         "importPath": "view",
         "description": "view",
-        "peekOfCode": "class Gui(ThemedTk):\n    conf: Config\n    def __post_init__(self) -> None:\n        super().__init__()\n        # Window configuration\n        self.title(self.conf.get_parameter(\"app_title\"))\n        self.iconbitmap(self.conf.get_parameter(\"app_icon_file\"))\n        # Window geometry\n        window_width = self.conf.get_parameter(\"app_window_width\")\n        window_height = self.conf.get_parameter(\"app_window_height\")",
+        "peekOfCode": "class Gui(ThemedTk):\n    conf: Config\n    def __post_init__(self) -> None:\n        super().__init__()\n        # Window configuration\n        self.title(self.conf.get_parameter(\"app_title\"))\n        self.iconbitmap(self.conf.get_parameter(\"app_icon_file\"))\n        self.resizable(\n            self.conf.get_parameter(\"app_window_resizable_width\"),\n            self.conf.get_parameter(\"app_window_resizable_height\"),",
+        "detail": "view",
+        "documentation": {}
+    },
+    {
+        "label": "ScrollableTreeFactory",
+        "kind": 6,
+        "importPath": "view",
+        "description": "view",
+        "peekOfCode": "class ScrollableTreeFactory:\n    root: ThemedTk\n    frame: ttk.Frame = None\n    def __post_init__(self) -> None:\n        self.frame = self.create_frame()\n    def create_frame(self):\n        frame = ttk.Frame(self.root)\n        tree = ttk.Treeview(frame)\n        tree.grid(row=0, column=0)\n        return frame",
         "detail": "view",
         "documentation": {}
     }

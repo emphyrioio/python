@@ -5,6 +5,7 @@ from typing import Callable, Protocol
 from config import Config
 
 from ttkthemes import ThemedTk
+from tkfactory import TkFactory
 
 
 class Presenter(Protocol):
@@ -31,6 +32,20 @@ class Gui(ThemedTk):
         # Window configuration
         self.title(self.conf.get_parameter("app_title"))
         self.iconbitmap(self.conf.get_parameter("app_icon_file"))
+        self.resizable(
+            self.conf.get_parameter("app_window_resizable_width"),
+            self.conf.get_parameter("app_window_resizable_height"),
+        )
+        self.minsize(
+            self.conf.get_parameter("app_window_min_width"),
+            self.conf.get_parameter("app_window_min_height"),
+        )
+        self.maxsize(
+            self.conf.get_parameter("app_window_max_width"),
+            self.conf.get_parameter("app_window_max_height"),
+        )
+        self.attributes("-alpha", self.conf.get_parameter("app_window_alpha"))
+        self.attributes("-topmost", self.conf.get_parameter("app_window_topmost"))
 
         # Window geometry
         window_width = self.conf.get_parameter("app_window_width")
@@ -44,11 +59,26 @@ class Gui(ThemedTk):
 
     def init_ui(self, presenter: Presenter) -> None:
         # STYLING
-        self.style = ttk.Style(self)
-        self.style.theme_use(self.conf.get_parameter("app_theme"))
+        def styling():
+            self.style = ttk.Style(self)
+            self.style.theme_use(self.conf.get_parameter("app_theme"))
+            self.style.configure("RedFrame.TFrame", background="red")
+
         # WIDGETS
+        def init_main_frame():
+            self.main_frame = ttk.Frame(self)
+            self.main_frame.grid(row=0, column=0, sticky="nsew")
 
         # GRID CONDIGURATION
+        def grid_config():
+            self.rowconfigure(0, weight=1)
+            self.columnconfigure(0, weight=1)
+            self.main_frame.rowconfigure(0, weight=1)
+            self.main_frame.columnconfigure(0, weight=1)
+
+        styling()
+        init_main_frame()
+        grid_config()
 
         # BIDINGS
 
@@ -72,3 +102,18 @@ class Gui(ThemedTk):
 
     def delete(self) -> None:
         pass
+
+
+@dataclass()
+class ScrollableTreeFactory:
+    root: ThemedTk
+    frame: ttk.Frame = None
+
+    def __post_init__(self) -> None:
+        self.frame = self.create_frame()
+
+    def create_frame(self):
+        frame = ttk.Frame(self.root)
+        tree = ttk.Treeview(frame)
+        tree.grid(row=0, column=0)
+        return frame
