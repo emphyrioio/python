@@ -5,7 +5,9 @@ from view import Gui
 
 
 def main() -> None:
-    conf = Config()
+    configuration_file = "config.yml"
+
+    conf = Config(configuration_file)
     model = Model()
     view = Gui(conf)
     presenter = Presenter(model, view)

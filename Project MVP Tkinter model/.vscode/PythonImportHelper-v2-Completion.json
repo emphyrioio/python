@@ -49,6 +49,15 @@
         "documentation": {}
     },
     {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
         "label": "Config",
         "importPath": "config",
         "description": "config",
@@ -94,6 +103,39 @@
         "description": "view",
         "isExtraImport": true,
         "detail": "view",
+        "documentation": {}
+    },
+    {
+        "label": "contextmanager",
+        "importPath": "contextlib",
+        "description": "contextlib",
+        "isExtraImport": true,
+        "detail": "contextlib",
+        "documentation": {}
+    },
+    {
+        "label": "ABC",
+        "importPath": "abc",
+        "description": "abc",
+        "isExtraImport": true,
+        "detail": "abc",
+        "documentation": {}
+    },
+    {
+        "label": "abstractclassmethod",
+        "importPath": "abc",
+        "description": "abc",
+        "isExtraImport": true,
+        "detail": "abc",
+        "documentation": {}
+    },
+    {
+        "label": "sqlite3",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sqlite3",
+        "description": "sqlite3",
+        "detail": "sqlite3",
         "documentation": {}
     },
     {
@@ -167,7 +209,7 @@
         "kind": 6,
         "importPath": "config",
         "description": "config",
-        "peekOfCode": "class Config:\n    config_parameters: dict = field(default_factory=dict)\n    def __post_init__(self) -> None:\n        with open(self.config_file, \"r\") as config_file:\n            self.config_parameters = yaml.safe_load(config_file)\n    def get_parameter(self, parameter_name=None) -> str | int | None:\n        if parameter_name in self.config_parameters:\n            return self.config_parameters[parameter_name]\n        else:\n            raise ValueError(\"Unknow parameter\")",
+        "peekOfCode": "class Config:\n    __config_file: str = \"config.yml\"\n    config_parameters: dict = field(default_factory=dict)\n    def __post_init__(self) -> None:\n        with open(self.config_file, \"r\") as config_file:\n            self.config_parameters = yaml.safe_load(config_file)\n    def get_parameter(self, parameter_name: str = None) -> str | int:\n        if parameter_name in self.config_parameters:\n            return self.config_parameters[parameter_name]\n        else:",
         "detail": "config",
         "documentation": {}
     },
@@ -176,7 +218,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def main() -> None:\n    conf = Config()\n    model = Model()\n    view = Gui(conf)\n    presenter = Presenter(model, view)\n    presenter.run()\nif __name__ == \"__main__\":\n    main()",
+        "peekOfCode": "def main() -> None:\n    configuration_file = \"config.yml\"\n    conf = Config(configuration_file)\n    model = Model()\n    view = Gui(conf)\n    presenter = Presenter(model, view)\n    presenter.run()\nif __name__ == \"__main__\":\n    main()",
         "detail": "main",
         "documentation": {}
     },
@@ -185,7 +227,25 @@
         "kind": 6,
         "importPath": "models",
         "description": "models",
-        "peekOfCode": "class Model:\n    def add(self) -> None:\n        pass\n    def get(self) -> None:\n        pass\n    def update(self) -> None:\n        pass\n    def delete(self) -> None:\n        pass",
+        "peekOfCode": "class Model(ABC):\n    @abstractclassmethod\n    def add(self) -> None:\n        pass\n    @abstractclassmethod\n    def get(self) -> None:\n        pass\n    @abstractclassmethod\n    def update(self) -> None:\n        pass",
+        "detail": "models",
+        "documentation": {}
+    },
+    {
+        "label": "SQLiteModel",
+        "kind": 6,
+        "importPath": "models",
+        "description": "models",
+        "peekOfCode": "class SQLiteModel:\n    db_file: str = None\n    @contextmanager\n    def open_db(self):\n        connection = sqlite3.connect(self.db_file)\n        cursor = connection.cursor()\n        try:\n            yield cursor\n        except sqlite3.DatabaseError as error:\n            print(error)",
+        "detail": "models",
+        "documentation": {}
+    },
+    {
+        "label": "SimpleSQLiteModel",
+        "kind": 6,
+        "importPath": "models",
+        "description": "models",
+        "peekOfCode": "class SimpleSQLiteModel(Model, SQLiteModel):\n    def __post_init__(self) -> None:\n        super().__init__()\n    def add(self) -> None:\n        pass\n    def get(self):\n        with self.open_db() as cursor:\n            cursor.execute(\"SELECT * FROM table\")\n            results = cursor.fetchall()\n    def update(self) -> None:",
         "detail": "models",
         "documentation": {}
     },
